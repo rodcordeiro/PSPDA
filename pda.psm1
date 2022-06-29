@@ -1,5 +1,3 @@
-
-
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
 #Get public and private function definition files.

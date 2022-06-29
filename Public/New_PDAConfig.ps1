@@ -64,6 +64,12 @@ Function New-PDAConfig (
             }
         }
         $data = Confirm-Choice -PromptMessage 'Deseja adicionar os arquivos para serem ? Esta configuracao podera ser modificada posteriormente.'
+        if($data){
+            $exitData = ''
+            while($exitData -eq  ''){
+                
+            }
+        }
     }
         
 
