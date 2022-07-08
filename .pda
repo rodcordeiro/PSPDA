@@ -1,18 +1,24 @@
 {
-    "name":  "PSPDA",
-    "files":  [
-
-              ],
-    "exclude":  [
-
-                ],
-    "env":  [
-                {
-                    "cliente":  "8",
-                    "path":  "c:\\pda",
-                    "iisSite":  "Centerlar.gateway.api",
-                    "type":  "1",
-                    "scheduledTask":  "[Inventario] Centerlar"
-                }
-            ]
+    "name": "PSPDA",
+    "files": [
+        "C:\\Users\\Rodrigo Cordeiro\\projetos\\personal\\PSPDA\\public\\Compress_pdaPublish.ps1",
+        "C:\\Users\\Rodrigo Cordeiro\\projetos\\personal\\PSPDA\\public\\Invoke_pdaPublish.ps1",
+        "C:\\Users\\Rodrigo Cordeiro\\projetos\\personal\\PSPDA\\public\\New_PDAConfig.ps1",
+        "C:\\Users\\Rodrigo Cordeiro\\projetos\\personal\\PSPDA\\public\\Update_PDAConfig.ps1"
+    ],
+    "exclude": [],
+    "env": [
+        {
+            "iisSite": "hl.api.admin",
+            "env": "dev",
+            "path": "c:\\users\\Rodrigo Cordeiro\\projetos\\personal\\pspda\\assets\\",
+            "type": "4"
+        },
+        {
+            "iisSite": "hl.api.admin",
+            "env": "hml",
+            "path": "c:\\users\\Rodrigo Cordeiro\\projetos\\personal\\pspda\\assets\\",
+            "type": "4"
+        }
+    ]
 }

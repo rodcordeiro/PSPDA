@@ -3,9 +3,9 @@ Import-Module "C:\Support\GitHub\PSPublishModule\PSPublishModule.psm1" -Force
 
 $Configuration = @{
     Information = @{
-        ModuleName        = 'PSDiscord'
+        ModuleName        = 'PSPDA'
 
-        DirectoryProjects = 'C:\Support\GitHub'
+        DirectoryProjects = "$Env:USERPROFILE\projetos\personal\PSPDA"
         #DirectoryModules  = "C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules"
         DirectoryModules  = "$Env:USERPROFILE\Documents\WindowsPowerShell\Modules"
 
@@ -13,34 +13,26 @@ $Configuration = @{
         AliasesToExport   = 'Public'
 
         Manifest          = @{
-            # Script module or binary module file associated with this manifest.
-            RootModule           = 'PSDiscord.psm1'
-            # Version number of this module.
-            ModuleVersion        = '0.2.X'
-            # Minimum version of the Windows PowerShell engine required by this module
-            PowerShellVersion    = '5.1'
-            # Supported PSEditions
-            CompatiblePSEditions = @('Desktop', 'Core')
-            # ID used to uniquely identify this module
-            GUID                 = 'd5ae39b1-56a4-4f43-b251-e402b0c3c485'
-            # Author of this module
-            Author               = 'Przemyslaw Klys'
-            # Company or vendor of this module
-            CompanyName          = 'Evotec'
-            # Copyright statement for this module
-            Copyright            = "(c) 2011 - $((Get-Date).Year) Przemyslaw Klys @ Evotec. All rights reserved."
-            # Description of the functionality provided by this module
-            Description          = 'Simple module to send messages to Discord'
-            # Tags applied to this module. These help with module discovery in online galleries.
-            Tags                 = @('Discord', 'Messaging', 'Communication', 'Social')
-            IconUri              = 'https://evotec.xyz/wp-content/uploads/2018/12/Discord-Logo-Color.png'
-            ProjectUri           = 'https://github.com/EvotecIT/PSDiscord'
-            #ReleaseNotes = ''
-            RequiredModules      = @(
-                @{ ModuleName = 'PSSharedGoods'; ModuleVersion = "Latest"; Guid = 'ee272aa8-baaa-4edf-9f45-b6d6f7d844fe' }
-            )
-        }
-    }
+                    RootModule = 'pda.psm1'
+                    ModuleVersion = '1.0.0'
+                    GUID = '5af698b0-2b23-4522-a600-bbe252f2a5b3'
+                    Author = 'Rodrigo Cordeiro <rodrigomendoncca@gmail.com> (http://rodcordeiro.com.br)'
+                    CompanyName = 'PDA Soluções'
+                    Copyright = '(c) 2022 Rodrigo Cordeiro. Todos os direitos reservados.'
+                    Description= 'Simple module to manage systems publish and updates'
+                    PowerShellVersion    = '5.1'
+                    FunctionsToExport    = @('New-PDAConfig')
+                    CmdletsToExport = @()
+                    VariablesToExport = '*'
+                    AliasesToExport      = @('New-PDAConfig')
+                    PrivateData          = @{
+                        PSData = @{
+                            Tags       = @('CLI','Automation','Publish')
+                            ProjectUri = 'https://github.com/rodcordeiro/PSPDA'
+                            IconUri    = 'https://raw.githubusercontent.com/rodcordeiro/PSPDA/main/assets/Aplica%C3%A7%C3%A3o%20de%20logo%20com%20nome.png'
+                        }
+                    }
+            }
     Options     = @{
         Merge             = @{
             Sort           = 'None'
@@ -105,7 +97,7 @@ $Configuration = @{
                 RemoveComments = $false
             }
             Integrate      = @{
-                ApprovedModules = @('PSSharedGoods', 'PSWriteColor', 'Connectimo', 'PSUnifi', 'PSWebToolbox', 'PSMyPassword')
+                ApprovedModules = @()
             }
         }
         Standard          = @{
@@ -138,8 +130,7 @@ $Configuration = @{
         }
     }
     Steps       = @{
-        BuildModule        = @{  # requires Enable to be on to process all of that
-            Enable           = $true
+        BuildModule        = @{  rue
             DeleteBefore     = $false
             Merge            = $true
             MergeMissing     = $true
@@ -154,13 +145,13 @@ $Configuration = @{
             RequiredModules = $false
             Verbose         = $false
         }
-        PublishModule      = @{  # requires Enable to be on to process all of that
-            Enabled      = $true
+        PublishModule      = @{  
             Prerelease   = ''
             RequireForce = $false
             GitHub       = $true
         }
     }
+}
 }
 
 New-PrepareModule -Configuration $Configuration
