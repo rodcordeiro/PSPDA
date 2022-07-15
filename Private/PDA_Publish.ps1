@@ -46,10 +46,9 @@ Function PDAPublish {
             return
         }
 
-        
-        [PDAConfig]$data = get_project_data $Folder
-        [PDAEnvironmentConfig]$environmet = $($data.env | Where-Object { $_.env -match $Env })
-        Write-output $environmet
+        Expand-Archive -Path $env:USERPROFILE\Desktop\admin.zip -DestinationPath C:\inetpub\wwwroot\repos\NKStore\Cloud.Autentication.React -Force
+        Remove-Item -Path $env:USERPROFILE\Desktop\admin.zip -Force
+            
 
     }
     End {

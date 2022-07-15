@@ -11,7 +11,10 @@ Function Update-PDAConfig {
         [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Adiciona um novo ambiente")]
         [PDAEnvironmentConfig] $Environment,
         [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Define se as informações devem ser inseridas de forma complementar ou substituir completamente os dados existetes.")]
-        [Switch] $Append
+        [Switch] $Append,
+        [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Adiciona uma nova configuração de ambiente de forma interativa.")]
+        [Switch] $NewEnv
+
     )
     Begin {
         $pda_path = get_pda_file $PWD
@@ -63,6 +66,32 @@ Function Update-PDAConfig {
                 $data.env = @($Environment)
             }
         
+        }
+        if($NewEnv){
+            $env = @()
+            $exitData = '.'
+            while ($exitData -ne '') {
+                $client = @{}
+
+                $client["env"] = Read-Host 'Informe o nome da configuracao de ambiente (Exemplo: dev,prd,hml,teste,etc.)'
+                $client["path"] = Read-Host 'Informe o caminho para publicao' 
+                $client["type"] = $type
+
+                $useIIS = Confirm-Choice -PromptMessage 'Utiliza site no IIS? '
+                if ($useIIS) { $client["iisSite"] = Read-Host "Informe o site do IIS" }
+            
+                $useScheduleTask = Confirm-Choice -PromptMessage 'Utiliza tarefa agendada do windows? '
+                if ($useScheduleTask) { $client["scheduledTask"] = Read-Host "Informe o nome da tarefa" }
+            
+                $useWS = Confirm-Choice -PromptMessage 'Utiliza servico do windows? '
+                if ($useWS) { $client["winsowsService"] = = Read-Host "Informe o nome do servico: " }
+            
+                $env += $client
+                $addNew = Confirm-Choice -PromptMessage 'Deseja adicionar outro ambiente?'
+                if (!$addNew) { $exitData = '' }
+            }
+                $data.env += $env
+            
         }
 
         New-Item -Type 'File' -Path $(Split-Path -Path $pda_path.Path -Parent) -Name '.pda' -Value $($data | ConvertTo-Json) -Force:$true -Confirm:$ConfirmPreference -WhatIf:$WhatIfPreference -Verbose:$VerbosePreference | Out-Null
