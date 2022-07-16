@@ -2,6 +2,9 @@
 
 # PSPDA
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rodcordeiro_PSPDA&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=rodcordeiro_PSPDA)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=rodcordeiro_PSPDA&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=rodcordeiro_PSPDA)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=rodcordeiro_PSPDA&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=rodcordeiro_PSPDA)
 
 <!-- 
 function ReloadPDA{remove-module pda;import-Module .\pda.psm1 -Verbose}

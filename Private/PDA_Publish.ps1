@@ -4,13 +4,13 @@ Function PDAPublish {
         [string] $IISSite,
         [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Tarefa agendada do windows")]
         [string] $ScheduledTask,
-        [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Tarefa agendada do windows")]
+        [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Windows Service")]
         [string] $WindowsService,
-        [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Tarefa agendada do windows")]
+        [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Caminho da pasta temporária onde estão os arquivos a serem publicados")]
         [string] $Path,
-        [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Tarefa agendada do windows")]
+        [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Pasta para publicação dos arquivos")]
         [string] $Destination,
-        [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Tarefa agendada do windows")]
+        [parameter(ValueFromPipelineByPropertyName, HelpMessage = "Template das ações a serem executadas")]
         [string] $Type
         
     )
@@ -33,24 +33,23 @@ Function PDAPublish {
     }
 
     Process {
-        if (!$File) { 
-            Write-Error 'E necessario informar o arquivo a ser publicado'
+        if (!$Path) { 
+            Write-Error 'E necessario informar o caminho dos dados'
             return
         }
-        if (!$Env) { 
-            Write-Error 'E necessario informar qual configuracao de ambiente a ser utilizada'
+        if (!$Destination) { 
+            Write-Error 'E necessario informar o caminho de destino dos dados'
+            return
+        }
+        if (!$Type) { 
+            Write-Error 'E necessario informar quais ações devem ser tomadas'
             return
         }
 
-        $name = $($(Split-Path -Path $File -Leaf).Replace('.zip', ''))
-        $Folder = "$($env:TEMP)\$($name)"
-        
-        New-Item -Type 'Directory' -Path $env:TEMP -Name $data.name  -Force:$true -Confirm:$ConfirmPreference  -WhatIf:$WhatIfPreference -Verbose:$VerbosePreference | Out-Null        
-        Expand-Archive -Path $File -DestinationPath $Folder  -Force:$true -Confirm:$ConfirmPreference  -WhatIf:$WhatIfPreference -Verbose:$VerbosePreference
-        
-        [PDAConfig]$data = get_project_data $Folder
-        [PDAEnvironmentConfig]$environmet = $($data.env | Where-Object { $_.env -match $Env })
-        Write-output $environmet
+        Expand-Archive -Path $env:USERPROFILE\Desktop\admin.zip -DestinationPath C:\inetpub\wwwroot\repos\NKStore\Cloud.Autentication.React -Force
+        Remove-Item -Path $env:USERPROFILE\Desktop\admin.zip -Force
+            
+
     }
     End {
         if ($IISSite) {
