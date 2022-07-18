@@ -71,7 +71,7 @@ Informe o numero do template"
                     if ($useScheduleTask) { $client["scheduledTask"] = Read-Host "Informe o nome da tarefa" }
                 
                     $useWS = Confirm-Choice -PromptMessage 'Utiliza servico do windows? '
-                    if ($useWS) { $client["winsowsService"] = = Read-Host "Informe o nome do servico: " }
+                    if ($useWS) { $client["windowsService"] = = Read-Host "Informe o nome do servico: " }
                 
                     $env += $client
                     $addNew = Confirm-Choice -PromptMessage 'Deseja adicionar outro ambiente?'

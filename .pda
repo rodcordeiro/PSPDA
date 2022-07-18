@@ -13,12 +13,6 @@
             "env": "dev",
             "path": "c:\\users\\Rodrigo Cordeiro\\projetos\\personal\\pspda\\assets\\",
             "type": "4"
-        },
-        {
-            "iisSite": "hl.api.admin",
-            "env": "hml",
-            "path": "c:\\users\\Rodrigo Cordeiro\\projetos\\personal\\pspda\\assets\\",
-            "type": "4"
         }
     ]
 }
