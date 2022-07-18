@@ -67,7 +67,7 @@ Function Update-PDAConfig {
             }
         
         }
-        if($NewEnv){
+        if ($NewEnv) {
             $env = @()
             $exitData = '.'
             while ($exitData -ne '') {
@@ -90,7 +90,7 @@ Function Update-PDAConfig {
                 $addNew = Confirm-Choice -PromptMessage 'Deseja adicionar outro ambiente?'
                 if (!$addNew) { $exitData = '' }
             }
-                $data.env += $env
+            $data.env += $env
             
         }
 
