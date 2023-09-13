@@ -16,25 +16,25 @@ Function New-Appointment {
             if (!$NonDestructive) {
                 # Self destruct!
                 Remove-Item function:Stop-Appointment -ErrorAction SilentlyContinue
-                Remove-Item function:deactivate  -ErrorAction SilentlyContinue
+                # Remove-Item function:deactivate  -ErrorAction SilentlyContinue
             }
         }
-        function global:deactivate([switch] $NonDestructive) {
-            if (Test-Path function:_old_virtual_prompt) {
-                $function:prompt = $function:_old_virtual_prompt
-                Remove-Item function:\_old_virtual_prompt
-            }
+        # function global:deactivate([switch] $NonDestructive) {
+        #     if (Test-Path function:_old_virtual_prompt) {
+        #         $function:prompt = $function:_old_virtual_prompt
+        #         Remove-Item function:\_old_virtual_prompt
+        #     }
         
-            if ($env:Appointment) {
-                [Environment]::SetEnvironmentVariable('Appointment', $null)
-            }
+        #     if ($env:Appointment) {
+        #         [Environment]::SetEnvironmentVariable('Appointment', $null)
+        #     }
         
-            if (!$NonDestructive) {
-                # Self destruct!
-                Remove-Item function:Stop-Appointment -ErrorAction SilentlyContinue
-                Remove-Item function:deactivate  -ErrorAction SilentlyContinue
-            }
-        }
+        #     if (!$NonDestructive) {
+        #         # Self destruct!
+        #         Remove-Item function:Stop-Appointment -ErrorAction SilentlyContinue
+        #         Remove-Item function:deactivate  -ErrorAction SilentlyContinue
+        #     }
+        # }
         
         
         function global:_old_virtual_prompt {
@@ -48,19 +48,19 @@ Function New-Appointment {
             $previous_prompt_value = & $function:_old_virtual_prompt
             $appointment = if ($(New-Timespan $env:Appointment $([DateTime]::Now)).TotalHours -lt 1) {
                 @{
-                    Time   = "$($(New-Timespan $env:Appointment $([DateTime]::Now)).TotalMinutes)";
+                    Time   = $(New-Timespan $env:Appointment $([DateTime]::Now))
                     Color  = 'blue';
-                    Letter = 'm';
+                    Letter = if ($(New-Timespan $env:Appointment $([DateTime]::Now)).Minutes -lt 1) { 's' } else { 'm' };
                 }
             }
             else {
                 @{
-                    Time   = "$($(New-Timespan $env:Appointment $([DateTime]::Now)).TotalHours)";
+                    Time   = $(New-Timespan $env:Appointment $([DateTime]::Now))
                     Color  = 'red';
                     Letter = 'h';
                 }
             }
-            $new_prompt_value = Write-Host "[$([Math]::Round($appointment.Time,2))$($appointment.Letter)] " -ForegroundColor $appointment.Color -NoNewline
+            $new_prompt_value = Write-Host "[$($appointment.Time.Hours.toString('00')):$($appointment.Time.Minutes.toString('00')):$($appointment.Time.Seconds.toString('00'))] " -ForegroundColor $appointment.Color -NoNewline
             ($new_prompt_value + $previous_prompt_value)
         }
         

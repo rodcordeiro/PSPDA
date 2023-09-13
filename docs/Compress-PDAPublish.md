@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Gera um arquivo zipado com a build da aplicação, contendo os arquivos informados no campo *files*
+Gera um arquivo zipado com a build da aplicação, contendo os arquivos informados no campo _files_
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Compress-PDAPublish [-WhatIf] [-Confirm] [<CommonParameters>]
 
 ## DESCRIPTION
 
-Gera um arquivo zipado com a build da aplicação, contendo os arquivos informados no campo *files*
+Gera um arquivo zipado com a build da aplicação, contendo os arquivos informados no campo _files_
 
 ## EXAMPLES
 
@@ -29,7 +29,7 @@ Gera um arquivo zipado com a build da aplicação, contendo os arquivos informad
 PS C:\> Compress-PDAPublish
 ```
 
-Gera o arquivo 
+Gera o arquivo
 
 ## PARAMETERS
 
